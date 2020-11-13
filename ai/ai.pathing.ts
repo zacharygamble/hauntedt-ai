@@ -1,3 +1,5 @@
+export {};
+
 interface IGameState {
   boardSize: [number, number];
   tileStates: TileState[][];
@@ -168,7 +170,7 @@ function findLongestPathImpl(gameState: IGameState, coord: Coord, visited: Coord
 function findLongestPath(gameState: IGameState, player: ITeamMemberState) {
 	let targets: MoveDirection[] = getTargetList(gameState, player);
 	let scores: number[] = [];
-	
+
 	for (let dir of targets) {
 		if (dir === MoveDirection.None) {
 			scores.push(-1);
@@ -217,7 +219,6 @@ function getNextMove(gameState: IGameState, player: ITeamMemberState) {
 
 	let targets = getTargetList(gameState, player);
 	let rand = Math.floor(Math.random() * targets.length);
-	console.log(targets);
 
 	return targets[rand];
 }

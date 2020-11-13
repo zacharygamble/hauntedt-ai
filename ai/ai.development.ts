@@ -1,3 +1,5 @@
+export {};
+
 interface IGameState {
   boardSize: [number, number];
   tileStates: TileState[][];
@@ -32,6 +34,19 @@ interface ITeamMemberState {
 }
 
 type Coord = [number, number]
+
+function isSafeTrivial(gameState: IGameState, coord: Coord) {
+	let [row, col] = coord;
+	let tile = gameState.tileStates[row][col];
+	switch (tile) {
+	case TileState.Good:
+	case TileState.Warning:
+		return true;
+	case TileState.Danger:
+	case TileState.Broken:
+		return false;
+	}
+}
 
 function isSafe(gameState: IGameState, coord: Coord, dir: MoveDirection) {
 	let width = gameState.boardSize[0];
@@ -92,10 +107,11 @@ function getTargetList(gameState: IGameState, player: ITeamMemberState) {
 function getNextMove(gameState: IGameState, player: ITeamMemberState) {
 	if (player.isDead)
 		return MoveDirection.None;
+	if (isSafeTrivial(gameState, player.coord))
+		return MoveDirection.None;
 
 	let targets = getTargetList(gameState, player);
 	let rand = Math.floor(Math.random() * targets.length);
-	console.log(targets);
 
 	return targets[rand];
 }
