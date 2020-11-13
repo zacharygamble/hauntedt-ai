@@ -49,8 +49,8 @@ function isSafeTrivial(gameState: IGameState, coord: Coord) {
 }
 
 function isSafe(gameState: IGameState, coord: Coord, dir: MoveDirection) {
-	let width = gameState.boardSize[0];
-	let height = gameState.boardSize[1];
+	let height = gameState.boardSize[0];
+	let width = gameState.boardSize[1];
 
 	let [row, col] = coord;
 
@@ -109,8 +109,8 @@ function getTargetList(gameState: IGameState, player: ITeamMemberState) {
 }
 
 function getCoord(gameState: IGameState, coord: Coord, dir: MoveDirection) {
-	let width = gameState.boardSize[0];
-	let height = gameState.boardSize[1];
+	let height = gameState.boardSize[0];
+	let width = gameState.boardSize[1];
 
 	let [row, col] = coord;
 
@@ -141,6 +141,15 @@ function getCoord(gameState: IGameState, coord: Coord, dir: MoveDirection) {
 	return ret;
 }
 
+
+function listcontains(list: Coord[], coord: Coord) {
+	for (let c of list) {
+		if (c[0] == coord[0] && c[1] === coord[1])
+			return true;
+	}
+	return false;
+}
+
 function findLongestPathImpl(gameState: IGameState, coord: Coord, visited: Coord[]) {
 	let maxScore: number = 0;
 	let targets: MoveDirection[] = getTargetListImpl(gameState, coord);
@@ -150,7 +159,7 @@ function findLongestPathImpl(gameState: IGameState, coord: Coord, visited: Coord
 		if (dir === MoveDirection.None)
 			continue;
 		let newCoord = getCoord(gameState, coord, dir);	
-		if (newCoord === null || visited.indexOf(coord) !== -1)
+		if (newCoord === null || listcontains(visited, coord))
 			continue;
 		if (!isSafeTrivial(gameState, <Coord> newCoord)) 
 			continue;
