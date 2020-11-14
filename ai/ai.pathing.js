@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var TileState;
 (function (TileState) {
     TileState[TileState["Good"] = 3] = "Good";
