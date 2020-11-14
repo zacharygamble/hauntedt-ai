@@ -32,8 +32,8 @@ function isSafeTrivial(gameState, coord) {
     }
 }
 function isSafe(gameState, coord, dir) {
-    var height = gameState.boardSize[0];
-    var width = gameState.boardSize[1];
+    var width = gameState.boardSize[0];
+    var height = gameState.boardSize[1];
     var row = coord[0], col = coord[1];
     switch (dir) {
         case MoveDirection.North:
@@ -84,8 +84,8 @@ function getTargetList(gameState, player) {
     return getTargetListImpl(gameState, player.coord);
 }
 function getCoord(gameState, coord, dir) {
-    var height = gameState.boardSize[0];
-    var width = gameState.boardSize[1];
+    var width = gameState.boardSize[0];
+    var height = gameState.boardSize[1];
     var row = coord[0], col = coord[1];
     switch (dir) {
         case MoveDirection.North:
@@ -111,14 +111,6 @@ function getCoord(gameState, coord, dir) {
     var ret = [row, col];
     return ret;
 }
-function listcontains(list, coord) {
-    for (var _i = 0, list_1 = list; _i < list_1.length; _i++) {
-        var c = list_1[_i];
-        if (c[0] == coord[0] && c[1] === coord[1])
-            return true;
-    }
-    return false;
-}
 function findLongestPathImpl(gameState, coord, visited) {
     var maxScore = 0;
     var targets = getTargetListImpl(gameState, coord);
@@ -128,7 +120,7 @@ function findLongestPathImpl(gameState, coord, visited) {
         if (dir === MoveDirection.None)
             continue;
         var newCoord = getCoord(gameState, coord, dir);
-        if (newCoord === null || listcontains(visited, coord))
+        if (newCoord === null || visited.indexOf(coord) !== -1)
             continue;
         if (!isSafeTrivial(gameState, newCoord))
             continue;

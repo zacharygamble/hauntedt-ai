@@ -159,7 +159,7 @@ function findLongestPathImpl(gameState: IGameState, coord: Coord, visited: Coord
 		if (dir === MoveDirection.None)
 			continue;
 		let newCoord = getCoord(gameState, coord, dir);	
-		if (newCoord === null || listcontains(visited, coord))
+		if (newCoord === null || listcontains(visited, newCoord))
 			continue;
 		if (!isSafeTrivial(gameState, <Coord> newCoord)) 
 			continue;
